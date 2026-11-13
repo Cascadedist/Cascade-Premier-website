@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: cascade-premier
+    runtime: node
+    plan: starter
+    region: washington
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: cascade-premier-inquiries
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NODE_ENV
+        value: production
+      - key: INQUIRY_STORE
+        value: /var/data/inquiries.json
+      - key: INQUIRY_EMAIL
+        value: cascadepremierdist@gmail.com
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_USER
+        value: cascadepremierdist@gmail.com
+      - key: SMTP_FROM
+        value: cascadepremierdist@gmail.com
+      - key: SMTP_PASS
+        sync: false
